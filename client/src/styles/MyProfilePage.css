@@ -1,0 +1,109 @@
+.toolbar {
+	z-index: 1;
+	position: fixed;
+	top: 20px;
+    padding: 20px;
+    margin-left: 20px;
+    width: 300px;
+    background: rgba(18, 18, 18, 0.5);
+    height: 600px;
+	overflow-y: scroll;
+	border-radius: 10px;
+}
+.delete-btn {
+	width: 120px;
+	padding: 10px;
+	border: 1px solid #fff;
+	background: none;
+	color: #fff;
+	border-radius: 4px;
+	margin-top: 10px;
+	cursor: pointer;
+	transition: 0.2s all;
+}
+.save-btn {
+	width: 120px;
+	padding: 10px;
+	border: 1px solid #fff;
+	background: none;
+	color: #fff;
+	border-radius: 4px;
+	margin-top: 10px;
+	cursor: pointer;
+	transition: 0.2s all;
+}
+.logout-btn {
+	width: 100px;
+	padding: 10px;
+	border: 1px solid #fff;
+	background: none;
+	color: #fff;
+	border-radius: 4px;
+	margin-top: 10px;
+	cursor: pointer;
+	transition: 0.2s all;
+}
+@media screen and (max-width:1160px) {
+	.toolbar {
+		width: 230px;
+		height: 500px;
+		overflow-y: scroll;
+		top: 0;
+		margin-left: 0;
+		background: rgba(20, 20, 20, 0.7);
+	}
+}
+.toolbar a {
+	color: #fff;
+}
+.profile-input {
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: none;
+	background: none;
+	color: #fff;
+}
+.input-file {
+    margin-top: 10px;
+	position: relative;
+	display: inline-block;
+	border: 1px solid #fff;
+}
+.input-file span {
+	position: relative;
+	display: inline-block;
+	cursor: pointer;
+	outline: none;
+	text-decoration: none;
+	font-size: 14px;
+	vertical-align: middle;
+	color: rgb(255 255 255);
+	text-align: center;
+	border-radius: 4px;
+	background-color: none;
+	line-height: 0px;
+	height: 40px;
+	padding: 30px;
+	box-sizing: border-box;
+	border: none;
+	margin: 0;
+	transition: background-color 0.2s;
+}
+.input-file input[type=file] {
+	position: absolute;
+	z-index: -1;
+	opacity: 0;
+	display: block;
+	width: 0;
+	height: 0;
+} 
+.input-file input[type=file]:focus + span {
+	box-shadow: 0 0 0 0.2rem #ffffff;
+}
+.input-file:active span {
+	background-color: #ffffff;
+}
+.input-file input[type=file]:disabled + span {
+	background-color: #eee;
+}   

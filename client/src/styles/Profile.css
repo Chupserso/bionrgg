@@ -1,0 +1,73 @@
+.profile {
+    width: 700px;
+    padding: 50px;
+    background: rgba(56, 2, 76, 0.6);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    /* border: 1px solid #2c2b2b; */
+    transition: 1s all;
+    border-radius: 10px;
+}
+.logo img {
+    border-radius: 100%;
+    width: 112px;
+    height: 112px;
+}
+.profile-main {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.profile-descr {
+    margin-top: 0px;
+    width: 400px;
+    text-align: center;
+}
+.profile-links {
+    max-width: 200px;
+    margin-top: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.profile-link {
+    cursor: pointer;
+    transition: 0.2s all;
+}
+.profile-link img {
+    width: 50px;
+    margin-top: 10px;
+}
+.music-title {
+    margin-top: 40px;
+}
+.timeline {
+    width: 100%;
+    cursor: pointer;
+}
+.profile-music-btns {
+    margin-top: 20px;
+}
+.profile-music-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+.profile-music-btn:hover {
+    background: #060606;
+}
+@media screen and (max-width:800px) {
+    .profile {
+        width: 280px;
+    }
+}
+a {
+    margin-left: 10px;
+}

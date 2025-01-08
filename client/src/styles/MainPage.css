@@ -1,0 +1,53 @@
+.subheader h1 {
+    color: #ffffff;
+    max-width: 720px;
+    font-size: 40px;
+    text-align: center;
+}
+.subheader span {
+    color: rgb(194 126 239);
+}
+.subheader {
+    margin-top: 150px;
+    display: flex;
+    justify-content: center;
+}
+.tutorial {
+    margin: 200px auto;
+    margin-bottom: 0;
+    opacity: 1;
+}
+.tutorial h2 {
+    color: rgb(255, 255, 255);
+    font-size: 40px;
+    text-align: center;
+}
+.tutorial ol {
+    max-width: 800px;
+    margin: 60px auto;
+    margin-bottom: 0;
+}
+.tutorial li {
+    margin-left: 30px;
+    padding: 30px;
+    color: #ffffff;
+    font-size: 20px;
+    border-radius: 15px;
+    margin-top: 20px;
+}
+.tutorial li:hover {
+    color: rgb(194 126 239);
+}
+.profiles-link {
+    width: 370px;
+    height: 60px;
+    margin: auto;
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    text-decoration: none;
+    border: 1px solid #ffffff;
+    transition: 0.2s all;
+}

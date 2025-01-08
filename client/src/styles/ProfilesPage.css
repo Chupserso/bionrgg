@@ -1,0 +1,27 @@
+.profiles-list {
+    display: flex;
+    flex-direction: column;
+}
+.profiles-title {
+    margin: 0;
+}
+.profiles-subtitle {
+    font-size: 18px;
+    margin-left: 80px;
+    margin-top: 0;
+    margin-bottom: 50px;
+}
+.profiles-item {
+    min-height: 80px;
+    background: rgba(91, 5, 122, 0.6);
+    margin-left: 80px;
+    margin-right: 80px;
+    padding: 30px;
+    margin-bottom: 50px;
+    cursor: pointer;
+    transition: 0.2s all;
+    border-radius: 10px;
+}
+.profiles-item:last-child {
+    margin-bottom: 0;
+}

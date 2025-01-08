@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css');
+
+a {
+  color: #ffffff;
+}
+* {
+  font-family: "Space Mono", monospace;
+  animation-name: animation;
+  animation-duration: 0.5s;
+  scrollbar-color: #ffffff #000000;
+  scrollbar-width: thin;
+}
+@keyframes animation {
+  0% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.default-title {
+  margin-top: 80px;
+  margin-left: 80px;
+  margin-bottom: 20px;
+}
+@media screen and (max-width:525px) {
+  .default-title {
+      margin-left: 0;
+      text-align: center;
+  }
+}
+body {
+  margin: 0;
+  padding: 0px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* animation: scroll 50s linear infinite; */
+  background: url(./resources/img/bg.gif) center center/cover no-repeat,
+    #111111;
+  color: #eee;
+  min-height: 100vh;
+  min-width: 360px;
+  width: 100%;
+  perspective: 1000px;
+  perspective-origin: 50% 50%;
+  background-attachment: fixed;
+  animation: moveBackground 20s linear infinite;
+
+}
+@keyframes moveBackground {
+  0% {
+      background-position: 0 0;
+  }
+  50% {
+      background-position: 50% 0;
+  }
+  100% {
+      background-position: 0 0;
+  }
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.app {
+  background: rgba(0, 0, 0, 0.4);
+  min-height: 100vh;
+}

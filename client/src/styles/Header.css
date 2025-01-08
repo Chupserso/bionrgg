@@ -1,0 +1,42 @@
+.header-logo {
+    margin-left: 80px;
+    width: 60px;
+}
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100px;
+}
+.header .menu {
+    display: flex;
+    justify-content: end;
+}
+.header a {
+    margin-right: 80px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 20px;
+    transition: 0.3s all;
+}
+.header a:hover {
+    text-decoration: underline;
+}
+@media screen and (max-width:1070px) {
+    .header a {
+        margin-right: 20px;
+    }
+    .header {
+        display: flex;
+        justify-content: space-around;
+        height: 180px;
+    }
+    .menu {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .header-logo {
+        margin-left: 0;
+    }
+}

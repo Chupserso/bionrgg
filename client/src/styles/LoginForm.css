@@ -1,0 +1,39 @@
+.login-form {
+    margin-left: 80px;
+}
+.error {
+    font-size: 20px;
+    color: red;
+}
+.login-textfield {
+    box-sizing: border-box;
+    padding: 10px;
+    margin: 20px 0;
+    width: 370px;
+    height: 40px;
+    background: none;
+    border: 1px solid #fff;
+    color: #fff;
+    font-size: 18px;
+}
+.login-btn {
+    width: 370px;
+    height: 60px;
+    border: 1px solid #fff;
+    color: #fff;
+    font-size: 18px;
+    background: none;
+    cursor: pointer;
+    transition: 0.2s all;
+}
+@media screen and (max-width:525px) {
+    .login-form {
+        margin-left: 0;
+    }
+    .login-textfield {
+        width: 100%;
+    }
+    .login-btn {
+        width: 100%;
+    }
+}
