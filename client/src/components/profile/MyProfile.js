@@ -12,7 +12,7 @@ import { ProfileLink } from "../profileLink/ProfileLink";
 export const MyProfile = (props) => {
     const username = localStorage.getItem("userID");
 
-    const {avatar, descr, inst, fb, steam, discord, views, twitch, tiktok, tg} = props;
+    const {avatar, descr, inst, fb, steam, discord, views, twitch, tiktok, tg, color, bg} = props;
 
     const instBlock = inst != "" ? <ProfileLink img={instaImg} url={inst} /> : null;
     const discordBlock = discord != "" ? <ProfileLink img={discordImg} url={discord} /> : null;
@@ -26,7 +26,7 @@ export const MyProfile = (props) => {
     const img = avatar == "data:image/jpeg;base64," ? profileImg : avatar;
 
     return (
-        <div className="profile">
+        <div className="profile" style={{background: color}}>
             <span className="views">Переглядів: {views}</span>
             <div className="profile-main">
                 <div className="logo">

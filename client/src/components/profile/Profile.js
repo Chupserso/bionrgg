@@ -15,7 +15,7 @@ import Swal from "sweetalert2";
 export const Profile = (props) => {
     const {username} = props;
 
-    const [user, setUser] = useState({username: "", descr: "", inst: "", fb: "", discord: "", steam: "", views: 0, avatar: ""});
+    const [user, setUser] = useState({username: "", descr: "", inst: "", fb: "", discord: "", steam: "", views: 0, avatar: "", color: "", bg: ""});
 
     const navigate = useNavigate();
 
@@ -56,7 +56,7 @@ export const Profile = (props) => {
             } else {
                 userArray = JSON.parse(response);
                 setUser({
-                    username: userArray[0], descr: userArray[1], inst: userArray[2], fb: userArray[3], discord: userArray[4], steam: userArray[5], views: Number(userArray[6]), avatar: "data:image/jpeg;base64," + userArray[7], twitch: userArray[8], tiktok: userArray[9], tg: userArray[10]
+                    username: userArray[0], descr: userArray[1], inst: userArray[2], fb: userArray[3], discord: userArray[4], steam: userArray[5], views: Number(userArray[6]), avatar: "data:image/jpeg;base64," + userArray[7], twitch: userArray[8], tiktok: userArray[9], tg: userArray[10], color: userArray[11], bg: "data:image/jpeg;base64," + userArray[12],
                 });
                 const viewsData = {action: "views", username: username};
                 fetch("http://bionrgg/server.php", {
@@ -86,7 +86,7 @@ export const Profile = (props) => {
     const avatar = user.avatar == "data:image/jpeg;base64," ? <img src={profileImg} /> : <img src={user.avatar} />;
 
     return (
-        <div className="profile">
+        <div className="profile" style={{background: user.color}}>
             <span className="views">Переглядів: {user.views}</span>
             <div className="profile-main">
                 <div className="logo">

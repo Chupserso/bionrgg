@@ -30,7 +30,9 @@ export const MyProfilePage = (props) => {
         tiktok: "",
         tg: "",
         avatar: null,
-        views: 0
+        views: 0,
+        color: "",
+        bg: "",
     });
 
     useEffect(() => {
@@ -90,11 +92,12 @@ export const MyProfilePage = (props) => {
         .then(response => {
             userArray = JSON.parse(response);
             setUserInfo({
-                username: localStorage.getItem("userID"), descr: userArray[1], inst: userArray[2], fb: userArray[3], discord: userArray[4], steam: userArray[5], views: Number(userArray[6]), avatar: "data:image/jpeg;base64," + userArray[7], twitch: userArray[8], tiktok: userArray[9], tg: userArray[10]
+                username: localStorage.getItem("userID"), descr: userArray[1], inst: userArray[2], fb: userArray[3], discord: userArray[4], steam: userArray[5], views: Number(userArray[6]), avatar: "data:image/jpeg;base64," + userArray[7], twitch: userArray[8], tiktok: userArray[9], tg: userArray[10], color: userArray[11], bg: "data:image/jpeg;base64," + userArray[12],
             });
         });
     }, []);
-    
+
+
     if (isRegistered != true) {
         navigate("/");
     }
@@ -143,6 +146,29 @@ export const MyProfilePage = (props) => {
         });
     }
 
+    const onFileBg = async (e) => {
+        const file = URL.createObjectURL(e.target.files[0]);
+        setUserInfo({...userInfo, bg: file});
+        const formData = new FormData()
+        formData.append("username", localStorage.getItem("userID"));
+        formData.append("bg", e.target.files[0]);
+        const res = await fetch("http://bionrgg/server.php", {
+            method: "POST",
+            header: {
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: formData
+        })
+        .then(response => response.text())
+        .then(response => {
+            console.log(response);
+            const image = "data:image/jpeg;base64," + response;
+        })
+        .catch((error) => {
+            console.error('Ошибка:', error);
+        });
+    }
+
     const onForm = (e) => {
         e.preventDefault();
 
@@ -171,8 +197,16 @@ export const MyProfilePage = (props) => {
         });
     }
 
+    const hexToRgb = (hex) => {
+        const bigint = parseInt(hex.slice(1), 16);
+        const r = (bigint >> 16) & 255;
+        const g = (bigint >> 8) & 255;
+        const b = bigint & 255;
+        return [r, g, b];
+    };
+
     return (
-        <div className="my-profile-page">
+        <div className="profile-page" style={{background: `url(${userInfo.bg}) center center/cover no-repeat`}}>
             <div className="toolbar">
                 <Link to="/">На головну сторінку</Link>
                 <h2 className="toolbar-title">Панель інструментів</h2>
@@ -183,6 +217,14 @@ export const MyProfilePage = (props) => {
                     <label>Опис</label>
                     <br />
                     <input maxLength="200" type="text" value={userInfo.descr} placeholder="..." className="profile-input" onChange={(e) => setUserInfo({...userInfo, descr: e.target.value})} />
+                    <br />
+                    <label>Колір головного блоку</label>
+                    <br />
+                    <input type="color" value={userInfo.color} onChange={(e) => {
+                        const color = e.target.value;
+                        const [r, g, b] = hexToRgb(color);
+                        setUserInfo({...userInfo, color: `rgba(${r}, ${g}, ${b}, 0.6)`});
+                    }} />
                     <br />
                     <label>Посилання на інстаграм</label>
                     <br />
@@ -222,11 +264,19 @@ export const MyProfilePage = (props) => {
                         <input type="file" name="file" accept="image/*,.png,.jpg,.gif,.web" onChange={onFile} />		
                         <span>Виберіть файл</span>
                     </label>
+                    <br />
+                    <br />
+                    <label>Фон страницы</label>
+                    <br />
+                    <label className="input-file">
+                        <input type="file" name="file" accept="image/*,.png,.jpg,.gif,.web" onChange={onFileBg} />		
+                        <span>Виберіть файл</span>
+                    </label>
                 </form>
                 <br /><input type="submit" className="delete-btn" value="Видалити" onClick={onDeleteBtn} />
                 <br /><input type="submit" className="logout-btn" value="Вийти" onClick={onExitBtn} />
             </div>
-            <MyProfile avatar={userInfo.avatar} views={userInfo.views} descr={userInfo.descr} inst={userInfo.inst} fb={userInfo.fb} steam={userInfo.steam} discord={userInfo.discord} twitch={userInfo.twitch} tiktok={userInfo.tiktok} tg={userInfo.tg} />
+            <MyProfile color={userInfo.color} bg={userInfo.bg} avatar={userInfo.avatar} views={userInfo.views} descr={userInfo.descr} inst={userInfo.inst} fb={userInfo.fb} steam={userInfo.steam} discord={userInfo.discord} twitch={userInfo.twitch} tiktok={userInfo.tiktok} tg={userInfo.tg} />
         </div>
     );
 }

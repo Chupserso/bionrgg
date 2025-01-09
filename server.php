@@ -21,6 +21,17 @@ if (isset($_FILES["image"])) {
     echo "hello";
 }
 
+if (isset($_FILES["bg"])) {
+    $file = $_FILES["bg"];
+    $username = $_POST["username"];
+
+    $imageData = base64_encode(file_get_contents($file['tmp_name']));
+
+    $sql = "UPDATE `users_info` SET `bg` = '$imageData' WHERE `users_info`.`username` = '$username';";
+    $connectDB->query($sql);
+    echo "hello";
+}
+
 if ($data["action"] == "register") {
     $username = $data["username"];
     $password = $data["password"];
@@ -65,6 +76,7 @@ if ($data["action"] == "register") {
     $twitch = $data["twitch"];
     $tiktok = $data["tiktok"];
     $tg = $data["tg"];
+    $color = $data["color"];
     $connectDB->query("UPDATE `users_info` SET `descr` = '$descr' WHERE `users_info`.`username` = '$username';");
     $connectDB->query("UPDATE `users_info` SET `inst` = '$inst' WHERE `users_info`.`username` = '$username';");
     $connectDB->query("UPDATE `users_info` SET `discord` = '$discord' WHERE `users_info`.`username` = '$username';");
@@ -73,13 +85,13 @@ if ($data["action"] == "register") {
     $connectDB->query("UPDATE `users_info` SET `twitch` = '$twitch' WHERE `users_info`.`username` = '$username';");
     $connectDB->query("UPDATE `users_info` SET `tiktok` = '$tiktok' WHERE `users_info`.`username` = '$username';");
     $connectDB->query("UPDATE `users_info` SET `tg` = '$tg' WHERE `users_info`.`username` = '$username';");
-
+    $connectDB->query("UPDATE `users_info` SET `color` = '$color' WHERE `users_info`.`username` = '$username';");
 } else if ($data["action"] == "get") {
     $username = $data["username"];
     $query = $connectDB->query("SELECT * FROM users_info WHERE username='$username'");
     $result;
     while ($result = $query->fetch_assoc()) {
-        $user = [$result["username"], $result["descr"], $result["inst"], $result["fb"], $result["discord"], $result["steam"], $result["views"], $result["avatar"], $result["twitch"], $result["tiktok"], $result["tg"]];
+        $user = [$result["username"], $result["descr"], $result["inst"], $result["fb"], $result["discord"], $result["steam"], $result["views"], $result["avatar"], $result["twitch"], $result["tiktok"], $result["tg"], $result["color"], $result["bg"]];
         echo json_encode($user);
     }
 } else if ($viewsData["action"] == "views") {
