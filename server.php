@@ -77,6 +77,22 @@ if ($data["action"] == "register") {
     $tiktok = $data["tiktok"];
     $tg = $data["tg"];
     $color = $data["color"];
+    $colorText = $data["colorText"];
+    $linkedin = $data["linkedin"];
+    $youtube = $data["youtube"];
+    $olx = $data["olx"];
+    $amazon = $data["amazon"];
+    $prom = $data["prom"];
+    $github = $data["github"];
+    $binance = $data["binance"];
+    $fhunt = $data["fhunt"];
+    $upwork = $data["upwork"];
+    $fiverr = $data["fiverr"];
+    $x = $data["x"];
+    $whatsapp = $data["whatsapp"];
+    $reddit = $data["reddit"];
+    $site = $data["site"];
+
     $connectDB->query("UPDATE `users_info` SET `descr` = '$descr' WHERE `users_info`.`username` = '$username';");
     $connectDB->query("UPDATE `users_info` SET `inst` = '$inst' WHERE `users_info`.`username` = '$username';");
     $connectDB->query("UPDATE `users_info` SET `discord` = '$discord' WHERE `users_info`.`username` = '$username';");
@@ -86,12 +102,29 @@ if ($data["action"] == "register") {
     $connectDB->query("UPDATE `users_info` SET `tiktok` = '$tiktok' WHERE `users_info`.`username` = '$username';");
     $connectDB->query("UPDATE `users_info` SET `tg` = '$tg' WHERE `users_info`.`username` = '$username';");
     $connectDB->query("UPDATE `users_info` SET `color` = '$color' WHERE `users_info`.`username` = '$username';");
+    $connectDB->query("UPDATE `users_info` SET `colorText` = '$colorText' WHERE `users_info`.`username` = '$username';");
+
+    $connectDB->query("UPDATE `users_info` SET `linkedin` = '$linkedin' WHERE `users_info`.`username` = '$username';");
+    $connectDB->query("UPDATE `users_info` SET `youtube` = '$youtube' WHERE `users_info`.`username` = '$username';");
+    $connectDB->query("UPDATE `users_info` SET `olx` = '$olx' WHERE `users_info`.`username` = '$username';");
+    $connectDB->query("UPDATE `users_info` SET `amazon` = '$amazon' WHERE `users_info`.`username` = '$username';");
+    $connectDB->query("UPDATE `users_info` SET `prom` = '$prom' WHERE `users_info`.`username` = '$username';");
+    $connectDB->query("UPDATE `users_info` SET `github` = '$github' WHERE `users_info`.`username` = '$username';");
+    $connectDB->query("UPDATE `users_info` SET `binance` = '$binance' WHERE `users_info`.`username` = '$username';");
+    $connectDB->query("UPDATE `users_info` SET `fhunt` = '$fhunt' WHERE `users_info`.`username` = '$username';");
+    $connectDB->query("UPDATE `users_info` SET `upwork` = '$upwork' WHERE `users_info`.`username` = '$username';");
+    $connectDB->query("UPDATE `users_info` SET `fiverr` = '$fiverr' WHERE `users_info`.`username` = '$username';");
+    $connectDB->query("UPDATE `users_info` SET `x` = '$x' WHERE `users_info`.`username` = '$username';");
+    $connectDB->query("UPDATE `users_info` SET `whatsapp` = '$whatsapp' WHERE `users_info`.`username` = '$username';");
+    $connectDB->query("UPDATE `users_info` SET `reddit` = '$reddit' WHERE `users_info`.`username` = '$username';");
+    $connectDB->query("UPDATE `users_info` SET `site` = '$site' WHERE `users_info`.`username` = '$username';");
+
 } else if ($data["action"] == "get") {
     $username = $data["username"];
     $query = $connectDB->query("SELECT * FROM users_info WHERE username='$username'");
     $result;
     while ($result = $query->fetch_assoc()) {
-        $user = [$result["username"], $result["descr"], $result["inst"], $result["fb"], $result["discord"], $result["steam"], $result["views"], $result["avatar"], $result["twitch"], $result["tiktok"], $result["tg"], $result["color"], $result["bg"]];
+        $user = [$result["username"], $result["descr"], $result["inst"], $result["fb"], $result["discord"], $result["steam"], $result["views"], $result["avatar"], $result["twitch"], $result["tiktok"], $result["tg"], $result["color"], $result["bg"], $result["colorText"], $result["linkedin"], $result["youtube"], $result["olx"], $result["amazon"], $result["prom"], $result["github"], $result["binance"], $result["fhunt"], $result["upwork"], $result["fiverr"], $result["x"], $result["whatsapp"], $result["reddit"], $result["site"]];
         echo json_encode($user);
     }
 } else if ($viewsData["action"] == "views") {
