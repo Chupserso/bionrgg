@@ -7,26 +7,28 @@ import twitchImg from "../../resources/img/twitch.png";
 import tiktokImg from "../../resources/img/tiktok.png";
 import tgImg from "../../resources/img/tg.png";
 import profileImg from "../../resources/img/profile.png";
-import linkedinImg from "../../resources/img/linkedin.png"
-import youtubeImg from "../../resources/img/youtube.png"
-import olxImg from "../../resources/img/olx.png"
-import amazonImg from "../../resources/img/amazon.png"
-import promImg from "../../resources/img/prom.png"
-import githubImg from "../../resources/img/github.png"
-import binanceImg from "../../resources/img/binance.png"
-import fhuntImg from "../../resources/img/fhunt.png"
-import upworkImg from "../../resources/img/upwork.png"
-import fiverrImg from "../../resources/img/fiverr.png"
-import xImg from "../../resources/img/x.png"
-import whatsappImg from "../../resources/img/whatsapp.png"
-import redditImg from "../../resources/img/reddit.png"
-import siteImg from "../../resources/img/site.png"
+import linkedinImg from "../../resources/img/linkedin.png";
+import youtubeImg from "../../resources/img/youtube.png";
+import olxImg from "../../resources/img/olx.png";
+import amazonImg from "../../resources/img/amazon.png";
+import promImg from "../../resources/img/prom.png";
+import githubImg from "../../resources/img/github.png";
+import binanceImg from "../../resources/img/binance.png";
+import fhuntImg from "../../resources/img/fhunt.png";
+import upworkImg from "../../resources/img/upwork.png";
+import fiverrImg from "../../resources/img/fiverr.png";
+import xImg from "../../resources/img/x.png";
+import whatsappImg from "../../resources/img/whatsapp.png";
+import redditImg from "../../resources/img/reddit.png";
+import siteImg from "../../resources/img/site.png";
+import djinniImg from "../../resources/img/dj.png";
+import douImg from "../../resources/img/dou.png";
 import { ProfileLink } from "../profileLink/ProfileLink";
 
 export const MyProfile = (props) => {
     const username = localStorage.getItem("userID");
 
-    const {colorText, avatar, descr, inst, fb, steam, discord, views, twitch, tiktok, tg, color, linkedin, youtube, olx, amazon, prom, github, binance, fhunt, upwork, fiverr, x, whatsapp, reddit, site} = props;
+    const {djinni, dou, colorText, avatar, descr, inst, fb, steam, discord, views, twitch, tiktok, tg, color, linkedin, youtube, olx, amazon, prom, github, binance, fhunt, upwork, fiverr, x, whatsapp, reddit, site} = props;
 
     const instBlock = inst != "" ? <ProfileLink img={instaImg} url={inst} /> : null;
     const discordBlock = discord != "" ? <ProfileLink img={discordImg} url={discord} /> : null;
@@ -51,6 +53,8 @@ export const MyProfile = (props) => {
     const whatsappBlock = whatsapp != "" ? <ProfileLink img={whatsappImg} url={whatsapp} /> : null;
     const redditBlock = reddit != "" ? <ProfileLink img={redditImg} url={reddit} /> : null;
     const siteBlock = site != "" ? <ProfileLink img={siteImg} url={site} /> : null;
+    const djinniBlock = djinni != "" ? <ProfileLink img={djinniImg} url={djinni} /> : null;
+    const douBlock = dou != "" ? <ProfileLink img={douImg} url={dou} /> : null;
 
     const img = avatar == "data:image/jpeg;base64," ? profileImg : avatar;
 
@@ -87,6 +91,8 @@ export const MyProfile = (props) => {
                 {whatsappBlock}
                 {redditBlock}
                 {siteBlock}
+                {douBlock}
+                {djinniBlock}
                 </div>
             </div>
         </div>

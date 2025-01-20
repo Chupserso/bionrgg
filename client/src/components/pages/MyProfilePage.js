@@ -47,7 +47,9 @@ export const MyProfilePage = (props) => {
         x: "",
         whatsapp: "",
         reddit: "",
-        site: ""
+        site: "",
+        djinni: "",
+        dou: ""
     });
 
     useEffect(() => {
@@ -107,7 +109,7 @@ export const MyProfilePage = (props) => {
         .then(response => {
             userArray = JSON.parse(response);
             setUserInfo({
-                username: localStorage.getItem("userID"), descr: userArray[1], inst: userArray[2], fb: userArray[3], discord: userArray[4], steam: userArray[5], views: Number(userArray[6]), avatar: "data:image/jpeg;base64," + userArray[7], twitch: userArray[8], tiktok: userArray[9], tg: userArray[10], color: userArray[11], bg: "data:image/jpeg;base64," + userArray[12], colorText: userArray[13], linkedin: userArray[14], youtube: userArray[15], olx: userArray[16], amazon: userArray[17], prom: userArray[18], github: userArray[19], binance: userArray[20], fhunt: userArray[21], upwork: userArray[22], fiverr: userArray[23], x: userArray[24], whatsapp: userArray[25], reddit: userArray[26], site: userArray[27],
+                username: localStorage.getItem("userID"), descr: userArray[1], inst: userArray[2], fb: userArray[3], discord: userArray[4], steam: userArray[5], views: Number(userArray[6]), avatar: "data:image/jpeg;base64," + userArray[7], twitch: userArray[8], tiktok: userArray[9], tg: userArray[10], color: userArray[11], bg: "data:image/jpeg;base64," + userArray[12], colorText: userArray[13], linkedin: userArray[14], youtube: userArray[15], olx: userArray[16], amazon: userArray[17], prom: userArray[18], github: userArray[19], binance: userArray[20], fhunt: userArray[21], upwork: userArray[22], fiverr: userArray[23], x: userArray[24], whatsapp: userArray[25], reddit: userArray[26], site: userArray[27], djinni: userArray[28], dou: userArray[29]
             });
         });
     }, []);
@@ -124,18 +126,29 @@ export const MyProfilePage = (props) => {
 
     const onDeleteBtn = () => {
         const data = {action: "delete", username: userInfo.username};
-        fetch("http://bionrgg/server.php", {
-            method: "POST",
-            header: {
-                "Content-Type": "application/x-www-form-urlencoded",
-            },
-            body: JSON.stringify({data})
-        })
-        .then(response => response.text())
-        .then(response => {
-            localStorage.removeItem("userID");
-            navigate("/");
-        });
+        Swal.fire({
+            title: "Ви точно хочете видалити свій акаунт?",
+            showDenyButton: true,
+            confirmButtonText: "Так",
+            denyButtonText: `Ні`
+          }).then((result) => {
+            if (result.isConfirmed) {
+                fetch("http://bionrgg/server.php", {
+                    method: "POST",
+                    header: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                    },
+                    body: JSON.stringify({data})
+                })
+                .then(response => response.text())
+                .then(response => {
+                    localStorage.removeItem("userID");
+                    navigate("/");
+                });
+            } else if (result.isDenied) {
+              return false;
+            }
+          });
     }
 
     const onFileAvatar = async (e) => {
@@ -280,6 +293,18 @@ export const MyProfilePage = (props) => {
                     <input type="text" value={userInfo.tg} placeholder="..." className="profile-input" onChange={(e) => setUserInfo({...userInfo, tg: e.target.value})} />
 
                     <br />
+                    <label>Посилання на Djinni</label>
+                    <br />
+                    <input type="text" value={userInfo.djinni} placeholder="..." className="profile-input" onChange={(e) => setUserInfo({...userInfo, djinni: e.target.value})} />
+                    <br />
+
+                    <br />
+                    <label>Посилання на Dou</label>
+                    <br />
+                    <input type="text" value={userInfo.dou} placeholder="..." className="profile-input" onChange={(e) => setUserInfo({...userInfo, dou: e.target.value})} />
+                    <br />
+
+                    <br />
                     <label>Посилання на linkedIn</label>
                     <br />
                     <input type="text" value={userInfo.linkedin} placeholder="..." className="profile-input" onChange={(e) => setUserInfo({...userInfo, linkedin: e.target.value})} />
@@ -371,7 +396,7 @@ export const MyProfilePage = (props) => {
                 <br /><input type="submit" className="delete-btn" value="Видалити" onClick={onDeleteBtn} />
                 <br /><input type="submit" className="logout-btn" value="Вийти" onClick={onExitBtn} />
             </div>
-            <MyProfile site={userInfo.site} linkedin={userInfo.linkedin} youtube={userInfo.youtube} olx={userInfo.olx} amazon={userInfo.amazon} prom={userInfo.prom} github={userInfo.github} fhunt={userInfo.fhunt} binance={userInfo.binance} fiverr={userInfo.fiverr} upwork={userInfo.upwork} x={userInfo.x} whatsapp={userInfo.whatsapp} reddit={userInfo.reddit} colorText={userInfo.colorText} color={userInfo.color} bg={userInfo.bg} avatar={userInfo.avatar} views={userInfo.views} descr={userInfo.descr} inst={userInfo.inst} fb={userInfo.fb} steam={userInfo.steam} discord={userInfo.discord} twitch={userInfo.twitch} tiktok={userInfo.tiktok} tg={userInfo.tg} />
+            <MyProfile djinni={userInfo.djinni} dou={userInfo.dou} site={userInfo.site} linkedin={userInfo.linkedin} youtube={userInfo.youtube} olx={userInfo.olx} amazon={userInfo.amazon} prom={userInfo.prom} github={userInfo.github} fhunt={userInfo.fhunt} binance={userInfo.binance} fiverr={userInfo.fiverr} upwork={userInfo.upwork} x={userInfo.x} whatsapp={userInfo.whatsapp} reddit={userInfo.reddit} colorText={userInfo.colorText} color={userInfo.color} bg={userInfo.bg} avatar={userInfo.avatar} views={userInfo.views} descr={userInfo.descr} inst={userInfo.inst} fb={userInfo.fb} steam={userInfo.steam} discord={userInfo.discord} twitch={userInfo.twitch} tiktok={userInfo.tiktok} tg={userInfo.tg} />
         </div>
     );
 }
