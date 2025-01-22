@@ -11,37 +11,25 @@ export const ProfilesPage = (props) => {
     const [profiles, setProfiles] = useState([]);
 
     useEffect(() => {
-        let timerInterval;
         Swal.fire({
-            title: "Профіль завантажується...",
-            html: "Я закриюся через <b></b> мілісекунд.",
-            timer: 2000,
-            timerProgressBar: true,
+            title: "Профілі завантажуються...",
             didOpen: () => {
                 Swal.showLoading();
-                const timer = Swal.getPopup().querySelector("b");
-                timerInterval = setInterval(() => {
-                timer.textContent = `${Swal.getTimerLeft()}`;
-                }, 100);
-            },
-            willClose: () => {
-                clearInterval(timerInterval);
+                const data = {action: "leaderboard"};
+                fetch("http://bionrgg/server.php", {
+                    method: "POST",
+                    header: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                    },
+                    body: JSON.stringify({data})
+                })
+                .then(response => response.text())
+                .then(response => {
+                    setProfiles(JSON.parse(response));
+                    Swal.hideLoading();
+                    Swal.close();
+                });
             }
-        });
-    }, []);
-
-    const data = {action: "leaderboard"};
-    useEffect(() => {
-        fetch("http://bionrgg/server.php", {
-            method: "POST",
-            header: {
-                "Content-Type": "application/x-www-form-urlencoded",
-            },
-            body: JSON.stringify({data})
-        })
-        .then(response => response.text())
-        .then(response => {
-            setProfiles(JSON.parse(response));
         });
     }, []);
 

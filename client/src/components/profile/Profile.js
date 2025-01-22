@@ -36,55 +36,43 @@ export const Profile = (props) => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        let timerInterval;
         Swal.fire({
             title: "Профіль завантажується...",
-            html: "Я закриюся через <b></b> мілісекунд.",
-            timer: 2000,
-            timerProgressBar: true,
             didOpen: () => {
                 Swal.showLoading();
-                const timer = Swal.getPopup().querySelector("b");
-                timerInterval = setInterval(() => {
-                timer.textContent = `${Swal.getTimerLeft()}`;
-                }, 100);
-            },
-            willClose: () => {
-                clearInterval(timerInterval);
-            }
-        });
-    }, []);
-
-    const data = {action: "get", username: username};
-    let userArray;
-    useEffect(() => {
-        fetch("http://bionrgg/server.php", {
-            method: "POST",
-            header: {
-                "Content-Type": "application/x-www-form-urlencoded",
-            },
-            body: JSON.stringify({data})
-        })
-        .then(response => response.text())
-        .then(response => {
-            if (response == "") {
-                navigate("/error-profile");
-            } else {
-                userArray = JSON.parse(response);
-                setUser({
-                    username: userArray[0], descr: userArray[1], inst: userArray[2], fb: userArray[3], discord: userArray[4], steam: userArray[5], views: Number(userArray[6]), avatar: "data:image/jpeg;base64," + userArray[7], twitch: userArray[8], tiktok: userArray[9], tg: userArray[10], color: userArray[11], bg: "data:image/jpeg;base64," + userArray[12], colorText: userArray[13], linkedin: userArray[14], youtube: userArray[15], olx: userArray[16], amazon: userArray[17], prom: userArray[18], github: userArray[19], binance: userArray[20], fhunt: userArray[21], upwork: userArray[22], fiverr: userArray[23], x: userArray[24], whatsapp: userArray[25], reddit: userArray[26], site: userArray[27], djinni: userArray[28], dou: userArray[29]
-                });
-                const viewsData = {action: "views", username: username};
+                const data = {action: "get", username: username};
+                let userArray;
                 fetch("http://bionrgg/server.php", {
                     method: "POST",
                     header: {
                         "Content-Type": "application/x-www-form-urlencoded",
                     },
-                    body: JSON.stringify({viewsData})
+                    body: JSON.stringify({data})
                 })
                 .then(response => response.text())
                 .then(response => {
-                    console.log(response);
+                    if (response == "") {
+                        navigate("/error-profile");
+                    } else {
+                        userArray = JSON.parse(response);
+                        setUser({
+                            username: userArray[0], descr: userArray[1], inst: userArray[2], fb: userArray[3], discord: userArray[4], steam: userArray[5], views: Number(userArray[6]), avatar: "data:image/jpeg;base64," + userArray[7], twitch: userArray[8], tiktok: userArray[9], tg: userArray[10], color: userArray[11], bg: "data:image/jpeg;base64," + userArray[12], colorText: userArray[13], linkedin: userArray[14], youtube: userArray[15], olx: userArray[16], amazon: userArray[17], prom: userArray[18], github: userArray[19], binance: userArray[20], fhunt: userArray[21], upwork: userArray[22], fiverr: userArray[23], x: userArray[24], whatsapp: userArray[25], reddit: userArray[26], site: userArray[27], djinni: userArray[28], dou: userArray[29]
+                        });
+                        Swal.hideLoading();
+                        Swal.close();
+                        const viewsData = {action: "views", username: username};
+                        fetch("http://bionrgg/server.php", {
+                            method: "POST",
+                            header: {
+                                "Content-Type": "application/x-www-form-urlencoded",
+                            },
+                            body: JSON.stringify({viewsData})
+                        })
+                        .then(response => response.text())
+                        .then(response => {
+                            console.log(response);
+                        });
+                    }
                 });
             }
         });

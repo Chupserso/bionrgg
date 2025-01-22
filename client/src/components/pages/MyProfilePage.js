@@ -75,44 +75,34 @@ export const MyProfilePage = (props) => {
                 setIsRegistered(false);
             }
         });
+    }, []);
 
-        let timerInterval;
+    useEffect(() => {
         Swal.fire({
             title: "Профіль завантажується...",
-            html: "Я закриюся через <b></b> мілісекунд.",
-            timer: 2000,
-            timerProgressBar: true,
             didOpen: () => {
                 Swal.showLoading();
-                const timer = Swal.getPopup().querySelector("b");
-                timerInterval = setInterval(() => {
-                timer.textContent = `${Swal.getTimerLeft()}`;
-                }, 100);
-            },
-            willClose: () => {
-                clearInterval(timerInterval);
+                const data = {action: "get", username: localStorage.getItem("userID")};
+                let userArray;
+                fetch("http://bionrgg/server.php", {
+                    method: "POST",
+                    header: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                    },
+                    body: JSON.stringify({data})
+                })
+                .then(response => response.text())
+                .then(response => {
+                    userArray = JSON.parse(response);
+                    setUserInfo({
+                        username: localStorage.getItem("userID"), descr: userArray[1], inst: userArray[2], fb: userArray[3], discord: userArray[4], steam: userArray[5], views: Number(userArray[6]), avatar: "data:image/jpeg;base64," + userArray[7], twitch: userArray[8], tiktok: userArray[9], tg: userArray[10], color: userArray[11], bg: "data:image/jpeg;base64," + userArray[12], colorText: userArray[13], linkedin: userArray[14], youtube: userArray[15], olx: userArray[16], amazon: userArray[17], prom: userArray[18], github: userArray[19], binance: userArray[20], fhunt: userArray[21], upwork: userArray[22], fiverr: userArray[23], x: userArray[24], whatsapp: userArray[25], reddit: userArray[26], site: userArray[27], djinni: userArray[28], dou: userArray[29]
+                    });
+                    Swal.hideLoading();
+                    Swal.close();
+                });
             }
         });
-    }, []);
-
-    const data = {action: "get", username: localStorage.getItem("userID")};
-    let userArray;
-    useEffect(() => {
-        fetch("http://bionrgg/server.php", {
-            method: "POST",
-            header: {
-                "Content-Type": "application/x-www-form-urlencoded",
-            },
-            body: JSON.stringify({data})
-        })
-        .then(response => response.text())
-        .then(response => {
-            userArray = JSON.parse(response);
-            setUserInfo({
-                username: localStorage.getItem("userID"), descr: userArray[1], inst: userArray[2], fb: userArray[3], discord: userArray[4], steam: userArray[5], views: Number(userArray[6]), avatar: "data:image/jpeg;base64," + userArray[7], twitch: userArray[8], tiktok: userArray[9], tg: userArray[10], color: userArray[11], bg: "data:image/jpeg;base64," + userArray[12], colorText: userArray[13], linkedin: userArray[14], youtube: userArray[15], olx: userArray[16], amazon: userArray[17], prom: userArray[18], github: userArray[19], binance: userArray[20], fhunt: userArray[21], upwork: userArray[22], fiverr: userArray[23], x: userArray[24], whatsapp: userArray[25], reddit: userArray[26], site: userArray[27], djinni: userArray[28], dou: userArray[29]
-            });
-        });
-    }, []);
+    }, [])
 
 
     if (isRegistered != true) {
