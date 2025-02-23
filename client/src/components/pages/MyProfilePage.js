@@ -4,6 +4,7 @@ import $ from "jquery";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet";
 
 export const MyProfilePage = (props) => {
     const {setIsHeader, setIsRegistered, isRegistered} = props;
@@ -60,7 +61,7 @@ export const MyProfilePage = (props) => {
         }
         fetch("http://bionrgg/server.php", {
             method: "POST",
-            header: {
+            headers: {
                 "Content-Type": "application/x-www-form-urlencoded",
             },
             body: JSON.stringify({data})
@@ -86,7 +87,7 @@ export const MyProfilePage = (props) => {
                 let userArray;
                 fetch("http://bionrgg/server.php", {
                     method: "POST",
-                    header: {
+                    headers: {
                         "Content-Type": "application/x-www-form-urlencoded",
                     },
                     body: JSON.stringify({data})
@@ -125,7 +126,7 @@ export const MyProfilePage = (props) => {
             if (result.isConfirmed) {
                 fetch("http://bionrgg/server.php", {
                     method: "POST",
-                    header: {
+                    headers: {
                         "Content-Type": "application/x-www-form-urlencoded",
                     },
                     body: JSON.stringify({data})
@@ -149,7 +150,7 @@ export const MyProfilePage = (props) => {
         formData.append("image", e.target.files[0]);
         const res = await fetch("http://bionrgg/server.php", {
             method: "POST",
-            header: {
+            headers: {
                 "Content-Type": "application/x-www-form-urlencoded",
             },
             body: formData
@@ -172,7 +173,7 @@ export const MyProfilePage = (props) => {
         formData.append("bg", e.target.files[0]);
         const res = await fetch("http://bionrgg/server.php", {
             method: "POST",
-            header: {
+            headers: {
                 "Content-Type": "application/x-www-form-urlencoded",
             },
             body: formData
@@ -200,7 +201,7 @@ export const MyProfilePage = (props) => {
 
         fetch("http://bionrgg/server.php", {
             method: "POST",
-            header: {
+            headers: {
                 "Content-Type": "application/x-www-form-urlencoded",
             },
             body: JSON.stringify({data})
@@ -225,6 +226,17 @@ export const MyProfilePage = (props) => {
 
     return (
         <div className="profile-page" style={{background: `url(${userInfo.bg}) center center/cover no-repeat`}}>
+            <Helmet>
+                <title>{`Профіль - ${userInfo.username}`}</title>
+                <meta name="description" content={`Ласкаво просимо на сторінку профілю користувача ${userInfo.username}. Тут ви можете редагувати та оновлювати ваші дані.`} />
+                <meta property="og:title" content={`Профіль - ${userInfo.username}`} />
+                <meta property="og:description" content={`Ласкаво просимо на сторінку профілю користувача ${userInfo.username}.`} />
+                <meta property="og:image" content={userInfo.avatar} />
+                <meta name="robots" content="index, follow" />
+                <meta name="twitter:title" content={`Профіль - ${userInfo.username}`} />
+                <meta name="twitter:description" content={`Ласкаво просимо на сторінку профілю користувача ${userInfo.username}.`} />
+                <meta name="twitter:image" content={userInfo.avatar} />
+            </Helmet>
             <div className="toolbar">
                 <Link to="/">На головну сторінку</Link>
                 <h2 className="toolbar-title">Панель інструментів</h2>

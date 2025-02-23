@@ -8,7 +8,7 @@ export const Header = (props) => {
     return (
         <header className="header">
             <Link to="/">
-                <img src={img} className="header-logo" />
+                <img src={img} className="header-logo" alt="Bionrgg логотип" />
             </Link>
             <div className="menu">
                 {

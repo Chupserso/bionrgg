@@ -46,7 +46,7 @@ export const LoginForm = (props) => {
     
             fetch("http://bionrgg/server.php", {
                 method: "POST",
-                header: {
+                headers: {
                     "Content-Type": "application/x-www-form-urlencoded",
                 },
                 body: JSON.stringify({data})

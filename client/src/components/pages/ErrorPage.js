@@ -6,7 +6,7 @@ export const ErrorPage = (props) => {
 
     return (
         <div className="error-page">
-            <h1 className="error-title">Цей профіль не існує...</h1>
+            <h1 className="error-title">Цей профіль в Bionrgg не існує...</h1>
         </div>
     );
 }
